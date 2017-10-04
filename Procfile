@@ -1,1 +1,1 @@
-web: node  index.js
+web: node --inspect=5858 index.js
