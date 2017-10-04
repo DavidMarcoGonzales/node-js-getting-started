@@ -15,7 +15,7 @@ server.route({
 })
 
 server.start(err => {
-  if(err) throw err;
+  if(err) {console.log("something", err)};
   console.log(`Server listening on port ${server.info.uri}`);
 });
 
