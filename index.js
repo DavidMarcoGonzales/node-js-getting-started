@@ -4,7 +4,7 @@ const Hapi = require('hapi');
 
 const server = new Hapi.Server();
 
-server.connection({port: 3001});
+server.connection({port: process.env.PORT || 5000});
 
 server.route({
   method: 'GET',
@@ -15,7 +15,7 @@ server.route({
 })
 
 server.start(err => {
-  if(err) {console.log("something", err)};
+  if(err) throw err;
   console.log(`Server listening on port ${server.info.uri}`);
 });
 
