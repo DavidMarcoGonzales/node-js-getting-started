@@ -1,18 +1,39 @@
-var express = require('express');
-var app = express();
+'use strict';
 
-app.set('port', (process.env.PORT || 5000));
+const Hapi = require('hapi');
 
-app.use(express.static(__dirname + '/public'));
+const server = new Hapi.Server();
 
-// views is directory for all template files
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+server.connection({port: 3001});
 
-app.get('/', function(request, response) {
-  response.render('pages/index');
+server.route({
+  method: 'GET',
+  path: '/hello',
+  handler: (request, reply) => {
+    reply({message: 'Hey there'});
+  }
+})
+
+server.start(err => {
+  if(err) throw err;
+  console.log(`Server listening on port ${server.info.uri}`);
 });
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
+// var express = require('express');
+// var app = express();
+
+// app.set('port', (process.env.PORT || 5000));
+
+// app.use(express.static(__dirname + '/public'));
+
+// // views is directory for all template files
+// app.set('views', __dirname + '/views');
+// app.set('view engine', 'ejs');
+
+// app.get('/', function(request, response) {
+//   response.render('pages/index');
+// });
+
+// app.listen(app.get('port'), function() {
+//   console.log('Node app is running on port', app.get('port'));
+// });
