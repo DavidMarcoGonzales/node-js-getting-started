@@ -16,7 +16,7 @@ server.register(
       method: 'GET',
       path: '/hello',
       handler: (request, reply) => {
-        reply({message: 'Hey there'});
+        reply({message: 'Hey there, Dave'});
       }
     })
     server.route({
@@ -30,6 +30,10 @@ server.register(
         }
       }
     })
+
+
+
+
     server.start(err => {
       if(err) throw err;
       console.log(`Server listening on port ${server.info.uri}`);
