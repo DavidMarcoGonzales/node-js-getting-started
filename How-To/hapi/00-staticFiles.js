@@ -2,9 +2,11 @@
 
 const Hapi = require('hapi');
 const server = new Hapi.Server();
-server.connection({ port: process.env.PORT || 5000 });
 
 const Path = require('path');
+
+server.connection({ port: process.env.PORT || 5000 });
+
 server.register(
   {
     register: require('inert')
