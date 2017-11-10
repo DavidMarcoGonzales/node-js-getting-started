@@ -1,30 +1,23 @@
 'use strict';
 
 const Hapi = require('hapi');
+const Inert = require('inert');
+const path = require('path');
 const server = new Hapi.Server();
 server.connection({ port: process.env.PORT || 5000 });
-
-const Path = require('path');
-server.register(
-  {
-    register: require('inert')
-  }, (err) => {
-    if (err) { throw err; }
-
-    server.route({
-      method: 'GET',
-      path: '/{path*}',
-      handler: {
-        directory: {
-          path: Path.join(__dirname, 'build'),
-          listing: false,
-          index: true
-        }
-      }
-    })
-    server.start(err => {
-      if (err) throw err;
-      console.log(`Server listening on port ${server.info.uri}`);
-    });
+server.register(Inert, () => {});
+server.route({
+  method: 'GET',
+  path: '/{path*}',
+  handler: {
+    directory: {
+      path: path.join(__dirname, 'build'),
+      listing: false,
+      index: true
+    }
   }
-)
+})
+server.start(err => {
+  if (err) throw err;
+  console.log(`Server listening on port ${server.info.uri}`);
+});

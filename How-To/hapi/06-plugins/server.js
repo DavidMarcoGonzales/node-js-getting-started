@@ -5,9 +5,6 @@ const Inert = require('inert');
 const Geolocate = require('hapi-geo-locate');
 const path = require('path');
 
-// Starting a Hapi server simply requires
-// an instance of Hapi.Server. We leave it
-// bare or we can add some configuration
 const server = new Hapi.Server({
   connections: {
     routes: {
@@ -18,11 +15,6 @@ const server = new Hapi.Server({
   }
 });
 
-// We need to specify a connection, which
-// we can default to the port specified in
-// an ENV variable, or 3001 if none is set.
-// We also need to configure CORS for requests
-// coming from a single page app
 server.connection({
   port: process.env.port || 3001,
   routes: {
@@ -32,8 +24,7 @@ server.connection({
   }
 });
 
-// The simple way to register a plugin
-// is to pass the module and a callback
+
 server.register(Inert, () => {});
 
 // To configure the plugin, we can pass
