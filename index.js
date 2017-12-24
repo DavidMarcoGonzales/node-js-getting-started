@@ -24,9 +24,9 @@ server.route({
 })
 server.route({
   method: 'GET',
-  path: "/cards/{slug}",
+  path: "/cards/{card}",
   handler: (req, res) => {
-    res(slug)
+    res(encodeURIComponent(req.params.card))
   }
 });
 server.start(err => {
