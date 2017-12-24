@@ -17,6 +17,13 @@ server.route({
     }
   }
 })
+server.route({
+  method: 'GET',
+  path: "/cards",
+  handler: (req, res) => {
+    res({message:"hey there"})
+  }
+});
 server.start(err => {
   if (err) throw err;
   console.log(`Server listening on port ${server.info.uri}`);
