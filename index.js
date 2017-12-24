@@ -4,7 +4,12 @@ const Hapi = require('hapi');
 const Inert = require('inert');
 const path = require('path');
 const server = new Hapi.Server();
-server.connection({ port: process.env.PORT || 5000 });
+server.connection({ port: process.env.PORT || 5000,
+  routes: {
+    cors: {
+      origin: ['*']
+    }
+  } });
 server.register(Inert, () => {});
 server.route({
   method: 'GET',
