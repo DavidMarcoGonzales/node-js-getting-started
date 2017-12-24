@@ -24,9 +24,9 @@ server.route({
 })
 server.route({
   method: 'GET',
-  path: "/cards",
+  path: "/cards/{slug}",
   handler: (req, res) => {
-    res({message:"hey there"})
+    res(slug)
   }
 });
 server.start(err => {
