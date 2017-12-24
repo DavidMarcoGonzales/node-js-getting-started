@@ -26,7 +26,7 @@ server.route({
 })
 const getVCard = (req, res) =>  {
   let card = req.params.card;
-  reply(card)
+  return card
 }
 server.route({
   method: 'GET',
