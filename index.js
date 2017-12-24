@@ -4,12 +4,14 @@ const Hapi = require('hapi');
 const Inert = require('inert');
 const path = require('path');
 const server = new Hapi.Server();
-server.connection({ port: process.env.PORT || 5000,
+server.connection({
+  port: process.env.PORT || 5000,
   routes: {
     cors: {
       origin: ['*']
     }
-  } });
+  }
+});
 server.register(Inert, () => {});
 server.route({
   method: 'GET',
@@ -22,12 +24,22 @@ server.route({
     }
   }
 })
+const getVCard = (req, res) =>  {
+  let card = req.params.card;
+  reply(card)
+}
 server.route({
   method: 'GET',
   path: "/cards/{card}",
-  handler: (req, res) => {
-    res(encodeURIComponent(req.params.card))
+  config: {
+    pre: [
+      {method: getVCard, assign: 'card'}
+    ],
+    handler: (req, res) => {
+      res(encodeURIComponent(req.pre.card))
+    }
   }
+
 });
 server.start(err => {
   if (err) throw err;
