@@ -24,19 +24,19 @@ server.route({
     }
   }
 })
-const getVCard = (req, res) =>  {
-  let card = req.params.card;
-  return card
-}
+// const getVCard = (req, res) =>  {
+//   let card = req.params.card;
+//   return card
+// }
 server.route({
   method: 'GET',
   path: "/cards/{card}",
   config: {
-    pre: [
-      {method: getVCard, assign: 'card'}
-    ],
+    // pre: [
+    //   {method: getVCard, assign: 'card'}
+    // ],
     handler: (req, res) => {
-      res(encodeURIComponent(req.pre.card))
+      res(encodeURIComponent(req.params.card))
     }
   }
 
