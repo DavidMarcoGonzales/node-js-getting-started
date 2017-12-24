@@ -31,14 +31,14 @@ server.route({
 server.route({
   method: 'GET',
   path: "/cards/{card}",
-  config: {
+  // config: {
     // pre: [
     //   {method: getVCard, assign: 'card'}
     // ],
     handler: (req, res) => {
       res(encodeURIComponent(req.params.card))
     }
-  }
+  // }
 
 });
 server.start(err => {
