@@ -11,15 +11,23 @@ const server = new Hapi.Server();
 // Mongoose
 const Mongoose = require('mongoose');
 const cardModel = require('./Models/cardModel');
-Mongoose.connect('mongodb://' + process.env.MLAB_USERNAME +':'+ process.env.MLAB_USERPASSWORD +'@ds161194.mlab.com:61194/' + process.env.MLAB_USERNAME, { useMongoClient: true });
+Mongoose.connect('mongodb://' + process.env.MLAB_USERNAME + ':' + process.env.MLAB_USERPASSWORD + '@ds161194.mlab.com:61194/' + process.env.MLAB_USERNAME, {
+  useMongoClient: true
+});
 Mongoose.connection.on('error', console.error.bind(console, 'connection error'));
-Mongoose.connection.once('open', function callback() {console.log('Connection with database succeeded.');});
+Mongoose.connection.once('open', function callback() {
+  console.log('Connection with database succeeded.');
+});
 
 
 // Hapi
 server.connection({
   port: process.env.PORT || 5000,
-  routes: {cors: {origin: ['*']}  }
+  routes: {
+    cors: {
+      origin: ['*']
+    }
+  }
 });
 
 server.register(Inert, () => {});
@@ -36,20 +44,35 @@ server.route({
 })
 server.route({
   method: 'GET',
-  path: "/cards/{cardId}",
+  path: "/cardsById/{cardId}",
   handler: (req, res) => {
+    console.log(req.params.cardId);
     cardModel.findById(req.params.cardId, function (err, card) {
       if (err) {
-          res('error')
+        res('error')
       } else {
-          res(card)
+        res(card)
+      }
+    });
+  }
+});
+server.route({
+  method: 'GET',
+  path: "/cardsCurrentURI/{api}/{Book}/{Section}/{SubSection}/{Number}",
+  handler: (req, res) => {
+    let {api, Book, Section, SubSection, Number} = req.params;
+    cardModel.find({currentURN:`/${api}/${Book}/${Section}/${SubSection}/${Number}` }, function (err, card) {
+      if (err) {
+        res('error')
+      } else {
+        res(card);
       }
   });
   }
 });
+
 server.start(err => {
   if (err) throw err;
   console.log(`Server listening on port ${server.info.uri}`);
 });
-
 
