@@ -58,7 +58,7 @@ server.route({
 });
 server.route({
   method: 'GET',
-  path: "/cardsCurrentURI/{api}/{Book}/{Section}/{SubSection}/{Number}",
+  path: "/cardsByCurrentURI/{api}/{Book}/{Section}/{SubSection}/{Number}",
   handler: (req, res) => {
     let {api, Book, Section, SubSection, Number} = req.params;
     cardModel.find({currentURN:`/${api}/${Book}/${Section}/${SubSection}/${Number}` }, function (err, card) {
