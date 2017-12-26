@@ -47,7 +47,7 @@ server.route({
   path: "/cardsById/{cardId}",
   handler: (req, res) => {
     console.log(req.params.cardId);
-    cardModel.findById(req.params.cardId, function (err, card) {
+    cardModel.find({_id: req.params.cardId}, function (err, card) {
       if (err) {
         res('error')
       } else {
