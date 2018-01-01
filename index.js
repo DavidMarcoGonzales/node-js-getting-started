@@ -21,15 +21,15 @@ Mongoose.connection.once('open', function callback() {
 
 
 // Hapi
-server.connection({port: process.env.PORT || 5000});
-// server.connection({
-//   port: process.env.PORT || 5000,
-//   routes: {
-//     cors: {
-//       origin: ['*']
-//     }
-//   }
-// });
+// server.connection({port: process.env.PORT || 5000});
+server.connection({
+  port: process.env.PORT || 5000,
+  routes: {
+    cors: {
+      origin: ['*']
+    }
+  }
+});
 
 server.register(Inert, () => {});
 server.route({
