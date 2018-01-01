@@ -19,7 +19,6 @@ Mongoose.connection.once('open', function callback() {
   console.log('Connection with database succeeded.');
 });
 
-
 // Hapi
 // server.connection({port: process.env.PORT || 5000});
 server.connection({
