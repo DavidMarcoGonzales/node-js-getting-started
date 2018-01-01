@@ -57,23 +57,37 @@ server.route({
     });
   }
 });
-server.route({
-  method: 'GET',
-  path: "/cardsByCurrentURI/{api}/{Book}/{Section}/{SubSection}/{Number}",
-  handler: (req, res) => {
-    let {api, Book, Section, SubSection, Number} = req.params;
-    cardModel.find({currentURN:`/${api}/${Book}/${Section}/${SubSection}/${Number}` }, function (err, card) {
-      if (err) {
-        res('error')
-      } else {
-        res(card);
-      }
-  });
-  }
-});
 
 server.start(err => {
   if (err) throw err;
   console.log(`Server listening on port ${server.info.uri}`);
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// server.route({
+//   method: 'GET',
+//   path: "/cardsByCurrentURI/{api}/{Book}/{Section}/{SubSection}/{Number}",
+//   handler: (req, res) => {
+//     let {api, Book, Section, SubSection, Number} = req.params;
+//     cardModel.find({currentURN:`/${api}/${Book}/${Section}/${SubSection}/${Number}` }, function (err, card) {
+//       if (err) {
+//         res('error')
+//       } else {
+//         res(card);
+//       }
+//   });
+//   }
+// });
