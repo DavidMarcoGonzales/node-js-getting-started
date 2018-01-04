@@ -44,7 +44,7 @@ server.route({
 })
 server.route({
   method: 'GET',
-  path: "/cardsById/{cardId}",
+  path: "/api/cardsById/{cardId}",
   handler: (req, res) => {
     console.log(req.params.cardId);
     cardModel.find({_id: req.params.cardId}, function (err, card) {
